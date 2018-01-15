@@ -3,6 +3,7 @@ package sample;
 import Logic.Game;
 import Logic.Player;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
 import java.util.List;
@@ -26,52 +27,35 @@ public class BoardFX extends GridPane {
             for(int j =0; j < size; j++) {
                 Pair<Integer, Integer> loc = new Pair<>(i,j);
                 char sign = this.game.getBoard().getBoard()[i][j].getSign();
-                this.tiles[i][j] = new Tile(loc, heightCell, widthCell, sign);
-                this.add(tiles[i][j], j, i);
-            }
-        }
-    }
-    public void notifyAllTiles(List<Pair<Integer, Integer>> possibles) {
-        for(int i = 0; i < tiles.length; i++) {
-            for(int j = 0; j < tiles.length; j++) {
-                tiles[i][j].notifyTile(this.game.getTurn());
-                if(possibles.contains(tiles[i][j].getLoc())){
-                    tiles[i][j].setCanBeClicked();
+                Color tileColor;
+                if(sign == 'O') {
+                    tileColor = this.game.getP2().getColor();
+                } else if( sign == 'X') {
+                    tileColor = this.game.getP1().getColor();
                 } else {
-                    tiles[i][j].setCanNotBeClicked();
+                    tileColor = Color.TRANSPARENT;
+                }
+                this.tiles[i][j] = new Tile(loc, heightCell, widthCell, tileColor);
+                this.add(tiles[i][j], i, j);
+            }
+        }
+    }
+
+    public Tile[][] getTiles() {
+        return this.tiles;
+    }
+    public void flipOnBoardFX() {
+        int size = this.game.getBoard().getBoardSize();
+        for(int i =0 ; i< size; i++) {
+            for (int j = 0; j < size; j++) {
+                char sign = this.game.getBoard().getBoard()[i][j].getSign();
+                if(sign == 'X'){
+                    this.tiles[i][j].changeCircleColor(game.getP1().getColor());
+                }
+                if(sign == 'O') {
+                    this.tiles[i][j].changeCircleColor(game.getP2().getColor());
                 }
             }
         }
     }
-    public void runGame() {
-        while(!this.game.isEndGame()) {
-            Player cur = this.game.getCurPlayer();
-            List<Pair<Integer, Integer>> posMoves = this.game.possibleMoves(cur);
-            if(posMoves.isEmpty()) {
-                this.game.changeTurn();
-                //Message to player
-                continue;
-            }
-            Pair<Integer, Integer> loc = null;
-            while(loc == null) {
-                loc = this.getClick();
-            }
-            this.game.playOneTurn(loc);
-
-
-        }
-    }
-    public Pair<Integer, Integer> getClick() {
-        Pair<Integer, Integer> loc;
-        for(int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles.length; j++) {
-                if(tiles[i][j].isClicked()) {
-                    return tiles[i][j].getLoc();
-                }
-            }
-        }
-        return null;
-    }
-
-
 }

@@ -34,7 +34,7 @@ public class MenuController  {
         try {
             HBox root = (HBox) loader.load();
             loader.setController(new GameController());
-            Scene gameScene = new Scene(root, 400, 400);
+            Scene gameScene = new Scene(root, 600, 400);
             stage.setScene(gameScene);
             stage.show();
         } catch (IOException e) {

@@ -63,7 +63,7 @@
             <Label text="Player 1:" />
             <ColorPicker fx:id="p1Color" prefHeight="39.0" prefWidth="80.0" />
             <Label text="Player 2:" />
-            <ColorPicker fx:id="p2Color" prefHeight="39.0" prefWidth="80.0" />
+            <ColorPicker fx:id="p2Color" prefHeight="39.0" prefWidth="80.0"/>
          </children>
          <GridPane.margin>
             <Insets left="50.0" />

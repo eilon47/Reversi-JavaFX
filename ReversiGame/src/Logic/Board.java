@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * Created by Eilon on 1/10/2018.
  */
-public class Board extends GridPane {
+public class Board  {
     private Cell[][] cells;
     private int freeCells;
     private int size;
@@ -66,35 +66,5 @@ public class Board extends GridPane {
         }
         return sb.toString();
     }
-
-    public void draw() {
-        this.getChildren().clear();
-        //if (startGame) {
-            int height = (int) this.getPrefHeight();
-            int width = (int) this.getPrefWidth();
-
-            double cellHeight = height / cells.length;
-            double cellWidth = width / cells[0].length;
-
-            for (int i = 0; i < cells.length; i++) {
-                for (int j = 0; j < cells[i].length; j++) {
-                    if (cells[i][j].getSign() == ' ') {
-                        this.add(new Rectangle(cellWidth, cellHeight,
-                                Color.YELLOWGREEN), j, i);
-                    } else {
-                        this.add(new Rectangle(cellWidth, cellHeight,
-                                Color.YELLOWGREEN), j, i);
-                        if (cells[i][j].getSign() == 'X') {
-                            this.add(new Rectangle(cellWidth - 2, cellHeight - 2,
-                                    Color.BLACK), j, i);
-                        } else {
-                            this.add(new Rectangle(cellWidth - 2, cellHeight - 2,
-                                    Color.WHITE), j, i);
-                        }
-                    }
-                }
-            }
-    }
-
 
 }

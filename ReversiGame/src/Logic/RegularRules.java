@@ -1,6 +1,7 @@
 package Logic;
 
 import javafx.util.Pair;
+import sample.BoardFX;
 
 
 import java.util.LinkedList;
@@ -101,4 +102,5 @@ public class RegularRules implements Rules {
         }
         return flipped;
     }
+
 }

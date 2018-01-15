@@ -1,5 +1,6 @@
 package sample;
 
+import Logic.Cell;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -15,10 +16,13 @@ public class Tile extends StackPane{
     private Circle circle;
     private Pair<Integer, Integer> loc;
     private boolean canBeClicked = false;
+    private Color color;
     private boolean clicked;
     private boolean turn;
     private Rectangle rec;
-    public Tile(Pair<Integer, Integer> loc, double height, double width, char sign) {
+
+    public Tile(Pair<Integer, Integer> loc, double height, double width, Color color) {
+        this.color = color;
         this.setPrefHeight(height);
         this.setPrefWidth(width);
         this.loc = loc;
@@ -31,48 +35,21 @@ public class Tile extends StackPane{
         double smaller = Math.min(height, width);
         this.getChildren().add(rec);
         double radius = smaller/2;
-        if(sign == 'X') {
-            this.circle = new Circle(radius, Color.BLACK);
-        } else if (sign == 'O') {
-            this.circle = new Circle(radius, Color.WHITE);
-        } else {
-            this.circle = null;
-        }
+        this.circle = new Circle(radius, this.color);
+        this.getChildren().add(circle);
         setOnMouseClicked(event -> {
-            this.circle = new Circle(radius, Color.BLACK);
-            this.getChildren().add(circle);
-            if(!canBeClicked) {
-                return;
-            }
             this.clicked = true;
-            if(turn) {
-                this.circle = new Circle(radius, Color.BLACK);
-                this.getChildren().add(circle);
-            }
-            if(!turn) {
-                this.circle = new Circle(radius, Color.WHITE);
-                this.getChildren().add(circle);
-            }
         });
     }
-    public void changeCircleColor() {
-        if(this.circle.getFill() == Color.BLACK) {
-            this.circle = new Circle(this.circle.getRadius(), Color.WHITE);
-        } else if(this.circle.getFill() == Color.WHITE) {
-            this.circle = new Circle(this.circle.getRadius(), Color.BLACK);
-        }
+    public void changeCircleColor(Color color) {
+        this.getChildren().remove(circle);
+        this.color = color;
+        this.circle = new Circle(this.circle.getRadius(), this.color);
+        this.getChildren().add(circle);
     }
-    public void setCanBeClicked() {
-        this.canBeClicked = true;
-    }
-    public void setCanNotBeClicked() {
-        this.canBeClicked = false;
-    }
+
     public Pair<Integer, Integer> getLoc(){
         return this.loc;
-    }
-    public void notifyTile(boolean turn) {
-        this.turn = turn;
     }
     public boolean isClicked() {
         if(clicked){

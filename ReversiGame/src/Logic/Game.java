@@ -1,6 +1,7 @@
 package Logic;
 
 import javafx.util.Pair;
+import sample.BoardFX;
 
 
 import java.util.List;
@@ -136,4 +137,5 @@ public class Game {
     public boolean isEndGame() {
         return this.endGame;
     }
+
 }
