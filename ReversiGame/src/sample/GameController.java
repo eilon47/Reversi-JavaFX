@@ -7,11 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -42,7 +44,7 @@ public class GameController implements Initializable{
     //Members
     private Game game;
     private BoardFX gameBoard;
-    private boolean isGameEnded;
+    private boolean noTurn;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         game = this.createGameFromSettings();
@@ -56,22 +58,39 @@ public class GameController implements Initializable{
         });
         //Something to check if the game ended in the normal game.
         //gameBoard.addEventHandler();
+        this.noTurn = false;
     }
     public void playOneTurn() {
-        Tile[][] tiles = this.gameBoard.getTiles();
         Pair<Integer, Integer> pressLoc = this.wasClicked();
         if(pressLoc == null) {
             return;
         }
         Player p = game.getCurPlayer();
         List<Pair<Integer, Integer>> posMoves = this.game.possibleMoves(p);
+        if(posMoves.isEmpty() && !this.noTurn){
+            this.noTurn = true;
+            this.game.changeTurn();
+            this.showAlert("You have no move");
+            return;
+        }
+        if(posMoves.isEmpty() && this.noTurn) {
+            System.out.print("no move 2");
+            //Show message of game ends.
+            return;
+        }
         if(posMoves.contains(pressLoc)){
+            this.noTurn = false;
             int score = this.game.playOneTurn(pressLoc);
             this.game.setScoreAfterMove(score);
             this.gameBoard.flipOnBoardFX();
             this.game.changeTurn();
         }
-
+        if(this.game.getBoard().isBoardFull()) {
+            //Show end game message
+            this.showAlert("Game ended");
+            System.out.print("Full Board");
+            return;
+        }
         this.setTextLabels();  
     }
     public Game createGameFromSettings() {
@@ -90,14 +109,7 @@ public class GameController implements Initializable{
         p2.setColor(gs.getP2Color());
         return new Game(b,p1,p2,r);
     }
-    public void notifyAllTiles(List<Pair<Integer, Integer>> possibles) {
-        Tile[][] tiles = this.gameBoard.getTiles();
-        for(int i = 0; i < tiles.length; i++) {
-            for(int j = 0; j < tiles.length; j++) {
 
-            }
-        }
-    }
     public Pair<Integer, Integer> wasClicked() {
         Tile[][] tiles = this.gameBoard.getTiles();
         for(int i = 0; i < tiles.length; i++) {
@@ -143,5 +155,12 @@ public class GameController implements Initializable{
         } else {
             this.curPlayer.setText("Player 2");
         }
+    }
+    public void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 }

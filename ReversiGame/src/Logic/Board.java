@@ -36,7 +36,7 @@ public class Board  {
         this.freeCells -= 4;
     }
 
-    public boolean isBoardEmpty() {
+    public boolean isBoardFull() {
         return (this.freeCells == 0);
     }
 

@@ -44,7 +44,7 @@ public class Game {
     public void run(){
         boolean noTurns = false;
         System.out.print(this.board.toString());
-        while(!board.isBoardEmpty()){
+        while(!board.isBoardFull()){
             this.printScore();
             Player curPlayer = this.getCurPlayer();
             Player nextPlayer = this.getNextPlayer();
