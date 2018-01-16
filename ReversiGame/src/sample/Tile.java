@@ -29,6 +29,7 @@ public class Tile extends StackPane{
         this.canBeClicked = false;
         this.turn = false;
         rec = new Rectangle(width, height);
+        rec.setStrokeWidth(0.5);
         rec.setFill(null);
         rec.setStroke(Color.BLACK);
         setAlignment(Pos.CENTER);
@@ -57,5 +58,15 @@ public class Tile extends StackPane{
             return true;
         }
         return false;
+    }
+    public void light(Color color) {
+        this.getChildren().remove(rec);
+        this.rec.setFill(color);
+        this.getChildren().add(rec);
+    }
+    public void unlight() {
+        this.getChildren().remove(rec);
+        this.rec.setFill(Color.TRANSPARENT);
+        this.getChildren().add(rec);
     }
 }

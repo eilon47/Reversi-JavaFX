@@ -48,7 +48,7 @@ public class MenuController  {
         try {
             GridPane root = (GridPane) loader.load();
             loader.setController(new SettingsController());
-            Scene settingsScene = new Scene(root, 400, 400);
+            Scene settingsScene = new Scene(root, 600, 400);
             stage.setScene(settingsScene);
             stage.show();
         } catch (IOException e) {

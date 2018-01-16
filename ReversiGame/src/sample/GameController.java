@@ -41,18 +41,20 @@ public class GameController implements Initializable{
     private Label score1;
     @FXML
     private Label score2;
+
     //Members
     private Game game;
     private BoardFX gameBoard;
+    private List<Pair<Integer, Integer>> nextPosMoves;
     private boolean noTurn;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         game = this.createGameFromSettings();
-        double gameH = root.getPrefHeight() - 20 ;
+        double gameH = root.getPrefHeight() - 10;
         gameBoard = new BoardFX(game, gameH, gameH);
         root.getChildren().add(0, gameBoard);
-        gameBoard.setPadding(new Insets(10,10, 0, 10));
         this.setTextLabels();
+        this.nextPosMoves = this.game.possibleMoves(this.game.getCurPlayer());
         gameBoard.setOnMouseClicked(event -> {
             this.playOneTurn();
         });
@@ -65,32 +67,36 @@ public class GameController implements Initializable{
         if(pressLoc == null) {
             return;
         }
-        Player p = game.getCurPlayer();
-        List<Pair<Integer, Integer>> posMoves = this.game.possibleMoves(p);
-        if(posMoves.isEmpty() && !this.noTurn){
-            this.noTurn = true;
-            this.game.changeTurn();
-            this.showAlert("You have no move");
+        if(!this.nextPosMoves.contains(pressLoc)) {
+            this.showAlert("You can't do that move");
             return;
         }
-        if(posMoves.isEmpty() && this.noTurn) {
-            System.out.print("no move 2");
-            //Show message of game ends.
-            return;
-        }
-        if(posMoves.contains(pressLoc)){
+        if(this.nextPosMoves.contains(pressLoc)){
             this.noTurn = false;
             int score = this.game.playOneTurn(pressLoc);
             this.game.setScoreAfterMove(score);
+            this.gameBoard.unlightTiles();
             this.gameBoard.flipOnBoardFX();
             this.game.changeTurn();
         }
+
         if(this.game.getBoard().isBoardFull()) {
             //Show end game message
             this.showAlert("Game ended");
-            System.out.print("Full Board");
             return;
         }
+        List<Pair<Integer, Integer>> posMoves = this.game.possibleMoves(this.game.getCurPlayer());
+        if(posMoves.isEmpty()){
+            this.showAlert("You have no move.");
+            this.game.changeTurn();
+            posMoves = this.game.possibleMoves(this.game.getCurPlayer());
+            if(posMoves.isEmpty()) {
+                this.showAlert("You have no move, game ended.");
+                //End game .
+            }
+        }
+        this.nextPosMoves = this.game.possibleMoves(this.game.getCurPlayer());
+        this.gameBoard.lightTiles();
         this.setTextLabels();  
     }
     public Game createGameFromSettings() {
@@ -125,7 +131,7 @@ public class GameController implements Initializable{
         try {
             Stage primaryStage = (Stage) this.endGame.getScene().getWindow();
             VBox root = (VBox) FXMLLoader.load(getClass().getResource("Menu.fxml"));
-            Scene scene = new Scene(root,520,400);
+            Scene scene = new Scene(root,600,400);
             //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             primaryStage.setTitle("Reversi Game");
             primaryStage.setScene(scene);
@@ -160,7 +166,6 @@ public class GameController implements Initializable{
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setContentText(message);
-
         alert.showAndWait();
     }
 }
