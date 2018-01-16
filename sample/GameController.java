@@ -175,6 +175,7 @@ public class GameController implements Initializable{
             HBox root = (HBox) loader.load();
             loader.setController(new GameController());
             Scene gameScene = new Scene(root, 600, 400);
+            gameScene.getStylesheets().add(getClass().getResource("GameStyle.css").toExternalForm());
             stage.setScene(gameScene);
             stage.show();
         } catch (IOException e) {
