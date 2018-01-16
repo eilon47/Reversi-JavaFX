@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="597.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SettingsController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.0" minWidth="10.0" prefWidth="194.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="215.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="191.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="267.0" minHeight="10.0" prefHeight="253.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label prefHeight="77.0" prefWidth="221.0" text=" Settings" textAlignment="RIGHT" GridPane.columnIndex="1">
+         <font>
+            <Font size="53.0" />
+         </font>
+      </Label>
+      <VBox prefHeight="237.0" prefWidth="214.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Label text="Size:">
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+            </Label>
+            <ChoiceBox fx:id="size" prefHeight="39.0" prefWidth="80.0" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <Integer fx:value="4" />
+                        <Integer fx:value="5" />
+                        <Integer fx:value="6" />
+                        <Integer fx:value="7" />
+                        <Integer fx:value="8" />
+                        <Integer fx:value="9" />
+                        <Integer fx:value="10" />
+                        <Integer fx:value="11" />
+                        <Integer fx:value="12" />
+                        <Integer fx:value="13" />
+                        <Integer fx:value="14" />
+                        <Integer fx:value="15" />
+                        <Integer fx:value="16" />
+                        <Integer fx:value="17" />
+                        <Integer fx:value="18" />
+                        <Integer fx:value="19" />
+                        <Integer fx:value="20" />
+                    </FXCollections>
+                </items>
+                <value>
+                    <Integer fx:value="8"/>
+                </value>
+            </ChoiceBox>
+            <Label text="Player 1:" />
+            <ColorPicker fx:id="p1Color" prefHeight="39.0" prefWidth="80.0" />
+            <Label text="Player 2:" />
+            <ColorPicker fx:id="p2Color" prefHeight="39.0" prefWidth="80.0"/>
+         </children>
+         <GridPane.margin>
+            <Insets left="50.0" />
+         </GridPane.margin>
+      </VBox>
+      <HBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <Button fx:id="cancel" mnemonicParsing="false" text="Cancel" onAction="#cancel" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="apply" mnemonicParsing="false" onAction="#apply" text="Apply" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+      </HBox>
+   </children>
+</GridPane>
