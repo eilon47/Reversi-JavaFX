@@ -1,6 +1,8 @@
 package sample;
 import java.io.*;
 import java.util.ArrayList;
+
+import Logic.Player;
 import javafx.scene.paint.Color;
 
 /**
@@ -11,6 +13,7 @@ public class GameSettings {
     private Color p1;
     private Color p2;
     private int size;
+    private String first;
     private boolean readyForGame;
 
     /**
@@ -51,15 +54,31 @@ public class GameSettings {
     public int getSize() {
         return this.size;
     }
+    /**
+     * isPlayer1First.
+     * checks if player 1 is the first one.
+     * @return boolean.
+     */
+    public boolean isPlayer1First() {
+        return (this.first.contains("1"));
+    }
 
+    /**
+     * returns the string of the first player.
+     * @return
+     */
+    public String getFirst() {
+        return this.first;
+    }
     /**
      * writeTOSettings.
      * @param size - size to be written.
      * @param p1Color - p1 color to be set.
      * @param p2Color - p2 color to be set.
+     * @param first the string of the first player.
      * @throws Exception - if there is a problem with writing to settings.
      */
-    public void writeTOSettings(int size, Color p1Color, Color p2Color) throws Exception{
+    public void writeTOSettings(int size, Color p1Color, Color p2Color, String first) throws Exception{
         BufferedWriter writer;
         writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(settings)));
         String boardSize = Integer.toString(size);
@@ -71,6 +90,8 @@ public class GameSettings {
         writer.newLine();
         writer.write(color2);
         writer.newLine();
+        writer.write(first);
+        writer.newLine();
         writer.close();
 
     }
@@ -81,6 +102,9 @@ public class GameSettings {
      */
     public void readFromSettings() throws Exception{
         BufferedReader reader;
+        if(!settings.exists()) {
+            this.writeTOSettings(8, Color.BLACK, Color.WHITE, "Player 1");
+        }
         reader = new BufferedReader(new InputStreamReader(new FileInputStream(settings)));
         String line = reader.readLine();
         ArrayList<String> args = new ArrayList<>();
@@ -91,6 +115,7 @@ public class GameSettings {
         this.size = Integer.parseInt(args.get(0));
         this.p1 = Color.valueOf(args.get(1));
         this.p2 = Color.valueOf(args.get(2));
+        this.first = args.get(3);
         this.readyForGame = true;
     }
 }

@@ -23,11 +23,15 @@ public class SettingsController implements Initializable {
     @FXML
     private ColorPicker p2Color;
     @FXML
+    private ChoiceBox<String> first;
+    @FXML
     private ChoiceBox<Integer> size;
     @FXML
     private Button apply;
     @FXML
     private Button cancel;
+    @FXML
+    private Button rules;
     @Override
     public void initialize(URL location, ResourceBundle resources) {}
 
@@ -40,11 +44,13 @@ public class SettingsController implements Initializable {
             GameSettings gs = new GameSettings();
             Color color1 = this.p1Color.getValue();
             Color color2 = this.p2Color.getValue();
+
             if(color1.toString().equals(color2.toString())) {
                 this.showAlert("Please choose different colors");
                 return;
             }
-            gs.writeTOSettings(this.size.getValue(), this.p1Color.getValue(), this.p2Color.getValue());
+            gs.writeTOSettings(this.size.getValue(), this.p1Color.getValue(),
+                    this.p2Color.getValue(), this.first.getValue());
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -76,6 +82,20 @@ public class SettingsController implements Initializable {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+    public void rules() {
+        String rules = "A move consists in placing from outside one piece on the board. Placed pieces can never be moved to another square later in the game.\n" +
+                "\n" +
+                "The incorporation of the pieces must be made according to the following rules:\n" +
+                "\n" +
+                "The incorported piece must outflank one or more of the opponent placed pieces\n" +
+                "To outflank means that a single piece or one straight row (vertical, horizontal or diagonal" +
+                "of pieces of the opponent is in both sides next to own pieces, with no empty squares between all those" +
+                " pieces\n" +
+                "The player who makes the move turns the outflanked pieces over, becoming all of them in own pieces\n" +
+                "If there is more than one outflanked row, all the involved pieces in those rows have to be flipped\n" +
+                "If it´s not possible to make this kind of move, turn is forfeited and the opponent repeats another move";
+        showAlert(rules);
     }
 
     /**

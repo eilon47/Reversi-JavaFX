@@ -79,9 +79,7 @@ public class BoardFX extends GridPane {
      */
     public void lightTiles() {
         this.nextPosMoves = this.game.possibleMoves(this.game.getCurPlayer());
-        System.out.println("Player: " + this.game.getCurPlayer().getSign());
         for(Pair<Integer, Integer> p : this.nextPosMoves) {
-            System.out.println(p.getKey() +","+ p.getValue());
             int x = p.getKey();
             int y = p.getValue();
             this.tiles[x][y].light(Color.LIGHTYELLOW);

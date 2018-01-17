@@ -127,7 +127,11 @@ public class GameController implements Initializable{
         Player p2 = new HumanPlayer('O', r);
         p1.setColor(gs.getP1Color());
         p2.setColor(gs.getP2Color());
-        return new Game(b,p1,p2,r);
+        Game g = new Game(b,p1,p2,r);
+        if(!gs.isPlayer1First()) {
+            g.changeTurn();
+        }
+        return g;
     }
 
     /**
