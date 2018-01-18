@@ -1,0 +1,53 @@
+commit 7bc5110ddca56e4069e9776bdae83f110c6f8050
+Author: greensd4 <33864348+greensd4@users.noreply.github.com>
+Date:   Wed Jan 17 18:25:54 2018 +0200
+
+    final changes
+
+commit 3c94458dbff41ad9fbfb92b569d3986311dceca8
+Author: greensd4 <33864348+greensd4@users.noreply.github.com>
+Date:   Wed Jan 17 11:26:02 2018 +0200
+
+    settings buttons
+
+commit ed56aea355dbefe816f88bd3c02b1ebfb372088c
+Author: greensd4 <33864348+greensd4@users.noreply.github.com>
+Date:   Tue Jan 16 23:20:40 2018 +0200
+
+    fix bugs
+
+commit e5d87c8af6e71126350e5457518af03936510119
+Author: greensd4 <33864348+greensd4@users.noreply.github.com>
+Date:   Tue Jan 16 18:06:59 2018 +0200
+
+    comments and styling + created jar
+
+commit e0c91e5a7606b0c4afdd69ee694313e8669c33f2
+Author: eilon47 <33837343+eilon47@users.noreply.github.com>
+Date:   Tue Jan 16 10:28:59 2018 +0200
+
+    Add files via upload
+
+commit 01e150e1208ad4e223939def844a4569a5b35fbd
+Author: eilon47 <33837343+eilon47@users.noreply.github.com>
+Date:   Mon Jan 15 18:50:28 2018 +0200
+
+    Add files via upload
+
+commit 8a398775f179324b05cdb614d52328afd9163bf2
+Author: eilon47 <33837343+eilon47@users.noreply.github.com>
+Date:   Mon Jan 15 14:05:28 2018 +0200
+
+    Add files via upload
+
+commit 50c0f311d716232a7b75bb7bda4e4f66e856ab8b
+Author: eilon47 <33837343+eilon47@users.noreply.github.com>
+Date:   Sun Jan 14 20:39:13 2018 +0200
+
+    Add files via upload
+
+commit ef13baf7a29b8a4941f74df0c47bfbb5715c74d8
+Author: eilon47 <33837343+eilon47@users.noreply.github.com>
+Date:   Sun Jan 14 20:38:05 2018 +0200
+
+    Create README.md
